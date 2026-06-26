@@ -52,17 +52,17 @@ export default function HoverFooter() {
   const contactInfo = [
     {
       icon: <Mail size={18} className="text-[#3ca2fa]" />,
-      text: "hello@xyvora.com",
-      href: "mailto:hello@xyvora.com",
+      text: "saipatnala248@gmail.com",
+      href: "mailto:saipatnala248@gmail.com",
     },
     {
       icon: <Phone size={18} className="text-[#3ca2fa]" />,
-      text: "+91 86373 73116",
-      href: "tel:+918637373116",
+      text: "+91 73821 83616 / +91 89190 09613",
+      href: "tel:+917382183616",
     },
     {
       icon: <MapPin size={18} className="text-[#3ca2fa]" />,
-      text: "Sylhet, Bangladesh",
+      text: "Visakhapatnam",
     },
   ];
 

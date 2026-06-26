@@ -107,9 +107,9 @@ export default function Contact() {
 
               <div className="space-y-6">
                 {[
-                  { icon: Mail, title: "Email Us", detail: "hello@xyvora.com", href: "mailto:hello@xyvora.com" },
-                  { icon: Phone, title: "Call Us", detail: "+91 86373 73116", href: "tel:+918637373116" },
-                  { icon: MapPin, title: "Location", detail: "Sylhet, Bangladesh", href: null },
+                  { icon: Mail, title: "Email Us", detail: "saipatnala248@gmail.com", href: "mailto:saipatnala248@gmail.com" },
+                  { icon: Phone, title: "Call Us", detail: "+91 73821 83616 / +91 89190 09613", href: "tel:+917382183616" },
+                  { icon: MapPin, title: "Location", detail: "Visakhapatnam", href: null },
                 ].map((item, index) => (
                   <motion.div key={index} variants={itemVariants} className="flex items-start gap-4 group">
                     <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:bg-primary/20 group-hover:border-primary/30 transition-colors shrink-0">
