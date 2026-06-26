@@ -4,7 +4,8 @@ import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
+import Contact from "@/components/Contact";
+import HoverFooter from "@/components/HoverFooter";
 
 export default function Home() {
   return (
@@ -15,7 +16,8 @@ export default function Home() {
       <Portfolio />
       <Testimonials />
       <CTA />
-      <Footer />
+      <Contact />
+      <HoverFooter />
     </main>
   );
 }

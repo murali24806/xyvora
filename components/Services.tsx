@@ -54,7 +54,7 @@ const itemVariants = {
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", date: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "", date: "", time: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -75,7 +75,7 @@ export default function Services() {
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      setFormData({ name: "", email: "", phone: "", date: "" });
+      setFormData({ name: "", email: "", phone: "", company: "", date: "", time: "" });
       
       setTimeout(() => {
         closeForm();
@@ -162,7 +162,7 @@ export default function Services() {
                     </svg>
                   </div>
                   <h4 className="text-xl font-bold text-white mb-2">Booking Confirmed!</h4>
-                  <p className="text-gray-400">We'll be in touch with you shortly.</p>
+                  <p className="text-gray-400">We&apos;ll be in touch with you shortly.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -198,12 +198,34 @@ export default function Services() {
                   </div>
                   <div>
                     <input 
+                      type="text" 
+                      placeholder="Company (Optional)" 
+                      value={formData.company}
+                      onChange={(e) => setFormData({...formData, company: e.target.value})}
+                      className="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <input 
                       type="date" 
                       required
                       value={formData.date}
                       onChange={(e) => setFormData({...formData, date: e.target.value})}
-                      className="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                      className="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors [color-scheme:dark]"
                     />
+                  </div>
+                  <div>
+                    <select 
+                      value={formData.time}
+                      onChange={(e) => setFormData({...formData, time: e.target.value})}
+                      className="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none"
+                      required
+                    >
+                      <option value="" disabled className="text-gray-500">Select a time</option>
+                      <option value="morning" className="bg-charcoal-900 text-white">Morning (9:00 AM - 12:00 PM)</option>
+                      <option value="afternoon" className="bg-charcoal-900 text-white">Afternoon (1:00 PM - 5:00 PM)</option>
+                      <option value="evening" className="bg-charcoal-900 text-white">Evening (6:00 PM - 8:00 PM)</option>
+                    </select>
                   </div>
                   <button 
                     type="submit" 

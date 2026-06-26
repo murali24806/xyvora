@@ -17,7 +17,7 @@ export default function CTA() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Let's discuss how we can bring your creative vision to life and build a digital presence that stands out.
+            Let&apos;s discuss how we can bring your creative vision to life and build a digital presence that stands out.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
