@@ -205,7 +205,8 @@ export default function Services() {
                       className="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                     />
                   </div>
-                  <div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-gray-300 ml-1 block">Preferred Date</label>
                     <input 
                       type="date" 
                       required
@@ -214,7 +215,8 @@ export default function Services() {
                       className="w-full bg-charcoal-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors [color-scheme:dark]"
                     />
                   </div>
-                  <div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-gray-300 ml-1 block">Preferred Time</label>
                     <select 
                       value={formData.time}
                       onChange={(e) => setFormData({...formData, time: e.target.value})}
