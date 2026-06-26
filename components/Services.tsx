@@ -67,20 +67,33 @@ export default function Services() {
     setSelectedService(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, service: selectedService, type: 'booking' }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", phone: "", company: "", date: "", time: "" });
+        
+        setTimeout(() => {
+          closeForm();
+        }, 2000);
+      } else {
+        alert("Failed to book slot. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred. Please try again.");
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({ name: "", email: "", phone: "", company: "", date: "", time: "" });
-      
-      setTimeout(() => {
-        closeForm();
-      }, 2000);
-    }, 1500);
+    }
   };
 
   return (
