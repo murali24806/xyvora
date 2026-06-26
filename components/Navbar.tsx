@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Logo } from "./Logo";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -43,7 +44,8 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#home" className="text-2xl font-bold tracking-tighter flex items-center gap-1 group">
+        <a href="#home" className="text-2xl font-bold tracking-tighter flex items-center gap-2 group">
+          <Logo className="w-8 h-8 group-hover:scale-105 transition-transform" />
           <span>XyvorA</span>
           <div className="w-2 h-2 rounded-full bg-gradient-to-tr from-primary to-purple-400 group-hover:scale-150 transition-transform"></div>
         </a>
