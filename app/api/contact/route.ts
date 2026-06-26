@@ -65,7 +65,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         sender: {
           name: "XyvorA Website",
-          email: "noreply@xyvora.com" // You may need to change this to an email verified in your Brevo account
+          email: "saipatnala248@gmail.com" // Using verified email as sender
         },
         to: [
           {
