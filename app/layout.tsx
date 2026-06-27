@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   keywords: ["XyvorA", "smart creative solutions", "freelance agency", "web design", "digital marketing", "creative services", "brand growth", "UI/UX design", "web development"],
 };
 
+import WhatsAppButton from "@/components/WhatsAppButton";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,6 +23,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${inter.className} bg-background text-foreground antialiased`}>
         {children}
+        <WhatsAppButton />
         <GoogleAnalytics gaId="G-6Z2J40B37H" />
       </body>
     </html>
