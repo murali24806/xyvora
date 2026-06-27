@@ -14,9 +14,9 @@ export default function Hero() {
     <section id="home" className="relative flex flex-col items-center">
       <div className="w-full">
         <PixelHero
-          word1="Smart Creative Solutions For"
-          word2="Your Brand"
-          description="XyvorA is a premier creative freelance agency. We turn your ideas into striking visuals and high-converting websites that drive real business growth."
+          word1="Smart Creative"
+          word2="Solutions"
+          description="XyvorA is a premier creative freelance agency for your brand. We turn your ideas into striking visuals and high-converting websites that drive real business growth."
           primaryCta="Get a Quote"
           primaryCtaMobile="Quote"
           secondaryCta="View Our Work"
