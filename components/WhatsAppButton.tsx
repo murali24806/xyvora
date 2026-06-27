@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react"; // Fallback if no WhatsApp icon is available, though a custom SVG is better
+
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg
