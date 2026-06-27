@@ -28,10 +28,14 @@ export default function HoverFooter() {
     {
       title: "Services",
       links: [
-        { label: "Website Design", href: "#services" },
-        { label: "Logo Design", href: "#services" },
+        { label: "Website Designing", href: "#services" },
+        { label: "App Development", href: "#services" },
+        { label: "UI/UX Design", href: "#services" },
+        { label: "Logo Designing", href: "#services" },
         { label: "Ad Shooting", href: "#services" },
         { label: "Motion Ads", href: "#services" },
+        { label: "Poster Designing", href: "#services" },
+        { label: "Brand Strategy", href: "#services" },
       ],
     },
     {

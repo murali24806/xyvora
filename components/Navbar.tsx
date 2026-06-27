@@ -13,10 +13,13 @@ const navLinks = [
     href: "#services",
     dropdown: [
       "Website Designing",
+      "App Development",
+      "UI/UX Design",
       "Logo Designing",
       "Ad Shooting",
       "Motion Ads",
-      "Poster Designing"
+      "Poster Designing",
+      "Brand Strategy"
     ]
   },
   { name: "Portfolio", href: "#portfolio" },
