@@ -101,21 +101,21 @@ export async function POST(req: Request) {
     const customerHtmlContent = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaea; border-radius: 10px;">
         <h2 style="color: #6d28d9; border-bottom: 2px solid #eaeaea; padding-bottom: 10px;">
-          \${isBooking ? '🎉 Appointment Received!' : '👋 Thanks for reaching out!'}
+          ${isBooking ? '🎉 Appointment Received!' : '👋 Thanks for reaching out!'}
         </h2>
         
         <div style="margin-top: 20px;">
-          <p>Hi \${body.name},</p>
-          <p>Thank you for contacting XyvorA! This email is to confirm that we have successfully received your \${isBooking ? 'booking request' : 'message'}.</p>
+          <p>Hi ${body.name},</p>
+          <p>Thank you for contacting XyvorA! This email is to confirm that we have successfully received your ${isBooking ? 'booking request' : 'message'}.</p>
           
-          \${isBooking ? \`
+          ${isBooking ? `
             <div style="padding: 15px; background-color: #f9f9f9; border-left: 4px solid #6d28d9; border-radius: 4px; margin: 20px 0;">
               <strong>Your Booking Details:</strong><br/><br/>
-              <strong>Service:</strong> \${body.service}<br/>
-              <strong>Date:</strong> \${body.date}<br/>
-              <strong>Time:</strong> \${body.time}
+              <strong>Service:</strong> ${body.service}<br/>
+              <strong>Date:</strong> ${body.date}<br/>
+              <strong>Time:</strong> ${body.time}
             </div>
-          \` : ''}
+          ` : ''}
           
           <p>Our team will review your details and get back to you shortly to discuss the next steps.</p>
           <p>Best regards,<br/><strong>The XyvorA Team</strong></p>
