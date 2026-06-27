@@ -91,7 +91,66 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json({ success: true, message: "Email sent successfully" });
+    // -------------------------------------------------------------
+    // Send Auto-Responder to the Customer
+    // -------------------------------------------------------------
+    const customerSubject = isBooking 
+      ? `Booking Confirmation: ${body.service} with XyvorA`
+      : `We received your message - XyvorA`;
+
+    const customerHtmlContent = `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaea; border-radius: 10px;">
+        <h2 style="color: #6d28d9; border-bottom: 2px solid #eaeaea; padding-bottom: 10px;">
+          \${isBooking ? '🎉 Appointment Received!' : '👋 Thanks for reaching out!'}
+        </h2>
+        
+        <div style="margin-top: 20px;">
+          <p>Hi \${body.name},</p>
+          <p>Thank you for contacting XyvorA! This email is to confirm that we have successfully received your \${isBooking ? 'booking request' : 'message'}.</p>
+          
+          \${isBooking ? \`
+            <div style="padding: 15px; background-color: #f9f9f9; border-left: 4px solid #6d28d9; border-radius: 4px; margin: 20px 0;">
+              <strong>Your Booking Details:</strong><br/><br/>
+              <strong>Service:</strong> \${body.service}<br/>
+              <strong>Date:</strong> \${body.date}<br/>
+              <strong>Time:</strong> \${body.time}
+            </div>
+          \` : ''}
+          
+          <p>Our team will review your details and get back to you shortly to discuss the next steps.</p>
+          <p>Best regards,<br/><strong>The XyvorA Team</strong></p>
+        </div>
+      </div>
+    `;
+
+    const customerResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'api-key': process.env.BREVO_API_KEY
+      },
+      body: JSON.stringify({
+        sender: {
+          name: "XyvorA",
+          email: "saipatnala248@gmail.com" // Verified sender email
+        },
+        to: [
+          {
+            email: body.email,
+            name: body.name
+          }
+        ],
+        subject: customerSubject,
+        htmlContent: customerHtmlContent
+      })
+    });
+
+    if (!customerResponse.ok) {
+      console.error("Failed to send auto-responder to customer", await customerResponse.text());
+    }
+
+    return NextResponse.json({ success: true, message: "Emails sent successfully" });
     
   } catch (error) {
     console.error("Internal Server Error:", error);
