@@ -6,8 +6,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.xyvora.co.in'),
-  title: "XyvorA | Smart Creative Solutions",
-  description: "XyvorA is a creative services freelance agency providing complete brand growth through smart creative solutions.",
+  title: "XyvorA | Smart Creative Solutions & Freelance Agency",
+  description: "XyvorA is a creative services freelance agency providing complete brand growth through smart creative solutions, web design, and digital marketing.",
+  keywords: ["XyvorA", "smart creative solutions", "freelance agency", "web design", "digital marketing", "creative services", "brand growth", "UI/UX design", "web development"],
 };
 
 export default function RootLayout({
