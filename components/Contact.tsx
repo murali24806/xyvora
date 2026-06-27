@@ -248,10 +248,14 @@ export default function Contact() {
                     required
                   >
                     <option value="" disabled className="text-gray-500">Select a service</option>
-                    <option value="website" className="bg-charcoal-900 text-white">Website Design</option>
-                    <option value="logo" className="bg-charcoal-900 text-white">Logo Design</option>
+                    <option value="website" className="bg-charcoal-900 text-white">Website Designing</option>
+                    <option value="app_dev" className="bg-charcoal-900 text-white">App Development</option>
+                    <option value="ui_ux" className="bg-charcoal-900 text-white">UI/UX Design</option>
+                    <option value="logo" className="bg-charcoal-900 text-white">Logo Designing</option>
                     <option value="photo_video" className="bg-charcoal-900 text-white">Ad Shooting</option>
                     <option value="motion" className="bg-charcoal-900 text-white">Motion Ads</option>
+                    <option value="poster" className="bg-charcoal-900 text-white">Poster Designing</option>
+                    <option value="brand" className="bg-charcoal-900 text-white">Brand Strategy</option>
                   </select>
                 </div>
 

@@ -2,13 +2,23 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layout, Palette, Camera, Video, Image as ImageIcon, Lightbulb, ArrowRight, X } from "lucide-react";
+import { Layout, Palette, Camera, Video, Image as ImageIcon, Lightbulb, ArrowRight, X, Smartphone, PenTool } from "lucide-react";
 
 const services = [
   {
     icon: <Layout className="w-8 h-8 text-primary" />,
     title: "Website Designing",
     description: "Custom, responsive websites built to convert visitors into customers. Fast, accessible, and stunning.",
+  },
+  {
+    icon: <Smartphone className="w-8 h-8 text-primary" />,
+    title: "App Development",
+    description: "High-performance, intuitive mobile applications for iOS and Android.",
+  },
+  {
+    icon: <PenTool className="w-8 h-8 text-primary" />,
+    title: "UI/UX Design",
+    description: "User-centered design solutions that enhance engagement and deliver seamless experiences.",
   },
   {
     icon: <Palette className="w-8 h-8 text-primary" />,
