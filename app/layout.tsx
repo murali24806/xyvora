@@ -5,6 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.xyvora.co.in'),
   title: "XyvorA | Smart Creative Solutions",
   description: "XyvorA is a creative services freelance agency providing complete brand growth through smart creative solutions.",
 };
