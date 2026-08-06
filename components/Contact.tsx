@@ -160,7 +160,7 @@ export default function Contact() {
                     <MapPin className="w-4 h-4 text-gray-300" />
                   </div>
                   <div>
-                    <span className="text-[11px] text-gray-400 block">HQ Studio</span>
+                    <span className="text-[11px] text-gray-400 block">XyvorA</span>
                     <span className="text-xs sm:text-sm font-semibold text-white">Visakhapatnam, India</span>
                   </div>
                 </div>
