@@ -1,68 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layout, Palette, Camera, Video, Image as ImageIcon, Lightbulb, ArrowRight, X, Smartphone, PenTool, Sparkles, Layers, CheckCircle2, Zap, Target, ShieldCheck } from "lucide-react";
+import { X, Sparkles, Zap, Target, ShieldCheck, CheckCircle2 } from "lucide-react";
 import SpatialServiceShowcase from "@/components/ui/spatial-product-showcase";
-
-const services = [
-  {
-    icon: <Layout className="w-6 h-6 text-indigo-400" />,
-    title: "Website Designing",
-    tag: "High-Converting",
-    description: "Custom, responsive web applications engineered for speed, SEO excellence, and maximum conversion rates.",
-    deliverables: ["Next.js & React Architecture", "SEO & Performance Optimization", "Dynamic Glassmorphic UI"],
-  },
-  {
-    icon: <Smartphone className="w-6 h-6 text-cyan-400" />,
-    title: "App Development",
-    tag: "iOS & Android",
-    description: "Native-quality mobile applications crafted with intuitive touch interactions and seamless API integrations.",
-    deliverables: ["Cross-Platform Mobile Apps", "Intuitive UX Workflows", "Backend API Integration"],
-  },
-  {
-    icon: <PenTool className="w-6 h-6 text-purple-400" />,
-    title: "UI/UX Design Systems",
-    tag: "Pixel-Perfect",
-    description: "Comprehensive design tokens, Figma component systems, and design systems for enterprise scale.",
-    deliverables: ["Figma Design Systems", "Interactive Wireframes", "Micro-Animations"],
-  },
-  {
-    icon: <Palette className="w-6 h-6 text-indigo-400" />,
-    title: "Logo & Brand Identity",
-    tag: "Core Identity",
-    description: "Memorable brand identity packages, vector logomarks, color palettes, and corporate brand guidelines.",
-    deliverables: ["Vector Logomark & Marks", "Brand Style Guide Book", "Typography Systems"],
-  },
-  {
-    icon: <Video className="w-6 h-6 text-pink-400" />,
-    title: "Motion Ads & Animation",
-    tag: "Viral Reach",
-    description: "High-energy animated social media video ads designed to hook viewers and boost ad performance.",
-    deliverables: ["3D/2D Motion Graphics", "Social Media Ad Reels", "Custom Audio Visuals"],
-  },
-  {
-    icon: <Camera className="w-6 h-6 text-amber-400" />,
-    title: "Ad Shooting & Visuals",
-    tag: "Commercial",
-    description: "High-resolution product photography, video production, and commercial campaign content.",
-    deliverables: ["Product Photography", "Commercial Video Edits", "Color Grading"],
-  },
-  {
-    icon: <ImageIcon className="w-6 h-6 text-emerald-400" />,
-    title: "Poster & Print Design",
-    tag: "High Impact",
-    description: "Scroll-stopping promotional banners, event posters, marketing collateral, and print assets.",
-    deliverables: ["Social Media Banners", "Event Marketing Posters", "Print Ready Assets"],
-  },
-  {
-    icon: <Lightbulb className="w-6 h-6 text-yellow-400" />,
-    title: "Brand Strategy & Growth",
-    tag: "Strategic",
-    description: "Market positioning, competitive analysis, and strategic roadmap to position your brand at the top.",
-    deliverables: ["Market Positioning", "Competitor Audit", "Growth Strategy"],
-  },
-];
 
 const processSteps = [
   {
@@ -96,7 +37,17 @@ export default function Services() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "", date: "", time: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [viewMode, setViewMode] = useState<"bento" | "spatial">("bento");
+  const [activeStep, setActiveStep] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-cycle tracking step every 3.5s (pauses on hover)
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % processSteps.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   const handleBookSlot = (serviceTitle: string) => {
     setSelectedService(serviceTitle);
@@ -154,122 +105,202 @@ export default function Services() {
           <p className="text-gray-400 text-base md:text-lg max-w-xl mx-auto">
             From high-converting web applications to visual brand identities, we deliver full-stack creative execution.
           </p>
-
-          {/* View Mode Switcher */}
-          <div className="flex items-center justify-center gap-2 mt-8 p-1.5 bg-charcoal-900/90 backdrop-blur-md rounded-full border border-white/10 w-fit mx-auto shadow-xl">
-            <button
-              onClick={() => setViewMode("bento")}
-              className={`flex items-center gap-2 px-5 py-2 rounded-full text-xs md:text-sm font-medium transition-all ${
-                viewMode === "bento"
-                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow-lg shadow-indigo-600/30"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              <Layers className="w-4 h-4" />
-              Bento Grid Mode
-            </button>
-            <button
-              onClick={() => setViewMode("spatial")}
-              className={`flex items-center gap-2 px-5 py-2 rounded-full text-xs md:text-sm font-medium transition-all ${
-                viewMode === "spatial"
-                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow-lg shadow-indigo-600/30"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              <Sparkles className="w-4 h-4" />
-              3D Spatial Stage
-            </button>
-          </div>
         </div>
 
-        {/* View Mode Content */}
-        {viewMode === "spatial" ? (
-          <div className="w-full transition-all">
-            <SpatialServiceShowcase onBookSlot={handleBookSlot} />
-          </div>
-        ) : (
-          /* Linear Bento Grid */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="bento-card p-6 md:p-7 flex flex-col justify-between group"
-              >
-                <div>
-                  {/* Top Bar */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/40 transition-colors">
-                      {service.icon}
-                    </div>
-                    <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-semibold text-gray-300 uppercase tracking-wider">
-                      {service.tag}
-                    </span>
-                  </div>
+        {/* 3D Spatial Stage Service Showcase */}
+        <div className="w-full transition-all">
+          <SpatialServiceShowcase onBookSlot={handleBookSlot} />
+        </div>
 
-                  {/* Title & Description */}
-                  <h3 className="font-heading text-lg md:text-xl font-bold text-white mb-2.5 group-hover:text-indigo-300 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-
-                  {/* Deliverables List */}
-                  <div className="space-y-2 mb-6 pt-4 border-t border-white/5">
-                    {service.deliverables.map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-xs text-gray-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400 flex-shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Bottom CTA Button */}
-                <button
-                  onClick={() => handleBookSlot(service.title)}
-                  className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-indigo-600/30 border border-white/10 hover:border-indigo-500/40 text-xs font-semibold text-white flex items-center justify-between transition-all group/btn"
-                >
-                  <span>Book Consultation</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-gray-400 group-hover/btn:translate-x-1 group-hover/btn:text-white transition-all" />
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {/* 4-Step Agency Process Section */}
-        <div className="mt-28 pt-20 border-t border-white/10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+        {/* 4-Step Agency Process Section with Responsive Tracking Animation */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mt-28 pt-20 border-t border-white/10 relative"
+        >
+          {/* Header with Animation */}
+          <div className="text-center max-w-2xl mx-auto mb-14 relative">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-4"
+            >
+              <Zap className="h-3.5 w-3.5 animate-pulse text-cyan-400" />
+              <span>Live Execution Progress Tracker</span>
+            </motion.div>
+            
             <h3 className="font-heading text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
-              Our 4-Step Execution Blueprint
+              Our 4-Step <span className="text-gradient">Execution Blueprint</span>
             </h3>
             <p className="text-gray-400 text-sm md:text-base">
-              A transparent, high-velocity workflow engineered to deliver results on time.
+              Interactive timeline tracking: hover or tap any step to inspect our agency process in real-time.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map((step, idx) => (
-              <div key={idx} className="relative p-6 rounded-2xl bg-charcoal-900/60 border border-white/10 hover:border-indigo-500/30 transition-all group">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-3xl font-extrabold text-white/20 font-heading group-hover:text-indigo-400/60 transition-colors">
-                    {step.number}
-                  </span>
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-                    {step.icon}
+          {/* DESKTOP HORIZONTAL TRACKING BAR (>= lg) */}
+          <div className="hidden lg:block relative mb-12 max-w-5xl mx-auto px-4">
+            {/* Background Rail */}
+            <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden relative">
+              {/* Dynamic Animated Active Beam */}
+              <motion.div 
+                className="h-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 shadow-[0_0_15px_#22d3ee]"
+                animate={{ width: `${((activeStep + 1) / processSteps.length) * 100}%` }}
+                transition={{ type: "spring", stiffness: 90, damping: 18 }}
+              />
+            </div>
+
+            {/* Step Node Indicators Aligned with 4 Grid Columns */}
+            <div className="grid grid-cols-4 w-full absolute -top-2 left-0 right-0 pointer-events-none">
+              {processSteps.map((step, idx) => {
+                const isActive = activeStep === idx;
+                const isPassed = activeStep >= idx;
+                return (
+                  <div key={idx} className="flex justify-center items-center relative">
+                    <div 
+                      className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-500 ${
+                        isActive
+                          ? "bg-cyan-400 shadow-[0_0_20px_#22d3ee] scale-125 border-2 border-white"
+                          : isPassed
+                          ? "bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.6)]"
+                          : "bg-charcoal-900 border border-white/20"
+                      }`}
+                    >
+                      {isActive && (
+                        <span className="w-2 h-2 rounded-full bg-charcoal-950 animate-ping" />
+                      )}
+                    </div>
                   </div>
-                </div>
-                <h4 className="font-heading text-lg font-bold text-white mb-2">{step.title}</h4>
-                <p className="text-gray-400 text-xs md:text-sm leading-relaxed">{step.description}</p>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
-        </div>
+
+          {/* PROCESS CARDS GRID (Responsive: Vertical tracking rail on Mobile, 4-col on Desktop) */}
+          <div className="relative pl-10 sm:pl-14 lg:pl-0">
+            {/* MOBILE VERTICAL TRACKING RAIL (< lg) */}
+            <div className="block lg:hidden absolute left-3.5 sm:left-5 top-6 bottom-6 w-1 bg-white/10 rounded-full overflow-hidden pointer-events-none">
+              <motion.div 
+                className="w-full bg-gradient-to-b from-indigo-500 via-cyan-400 to-emerald-400 shadow-[0_0_15px_#22d3ee]"
+                animate={{ height: `${((activeStep + 1) / processSteps.length) * 100}%` }}
+                transition={{ type: "spring", stiffness: 90, damping: 18 }}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 relative z-10">
+              {processSteps.map((step, idx) => {
+                const isActive = activeStep === idx;
+                
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    onMouseEnter={() => { setIsPaused(true); setActiveStep(idx); }}
+                    onMouseLeave={() => setIsPaused(false)}
+                    onClick={() => setActiveStep(idx)}
+                    className={`relative p-7 rounded-2xl transition-all duration-500 cursor-pointer flex flex-col justify-between group ${
+                      isActive
+                        ? "bg-gradient-to-b from-indigo-950/80 via-charcoal-900/95 to-charcoal-900 border-2 border-cyan-400/80 shadow-[0_0_40px_rgba(34,211,238,0.25)] -translate-y-2 scale-[1.02]"
+                        : "bg-charcoal-900/70 backdrop-blur-xl border border-white/10 hover:border-white/20 hover:bg-charcoal-900/90"
+                    }`}
+                  >
+                    {/* Mobile Node Marker Dot on Left Rail */}
+                    <div className="block lg:hidden absolute -left-[35px] sm:-left-[43px] top-8 z-20 pointer-events-none">
+                      <div 
+                        className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${
+                          isActive
+                            ? "bg-cyan-400 shadow-[0_0_15px_#22d3ee] scale-125 border-2 border-white"
+                            : activeStep >= idx
+                            ? "bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]"
+                            : "bg-charcoal-900 border border-white/20"
+                        }`}
+                      >
+                        {isActive && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-charcoal-950 animate-ping" />
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Top Inner Glow Overlay */}
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent transition-opacity duration-300 pointer-events-none ${
+                      isActive ? "opacity-100" : "opacity-0 group-hover:opacity-40"
+                    }`} />
+
+                    <div>
+                      {/* Card Header */}
+                      <div className="flex items-center justify-between mb-5">
+                        <span className={`text-4xl font-extrabold font-heading transition-all duration-300 ${
+                          isActive ? "text-cyan-400 scale-110" : "text-white/20 group-hover:text-white/40"
+                        }`}>
+                          {step.number}
+                        </span>
+                        
+                        {isActive ? (
+                          <span className="px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-[10px] font-extrabold text-cyan-300 flex items-center gap-1.5 animate-pulse shadow-sm shadow-cyan-500/20">
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                            LIVE TRACKING
+                          </span>
+                        ) : (
+                          <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-indigo-500/20 transition-all duration-300">
+                            <div className="text-indigo-400 group-hover:text-cyan-300 transition-colors">
+                              {step.icon}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Title & Description */}
+                      <h4 className={`font-heading text-lg md:text-xl font-bold mb-2.5 transition-colors ${
+                        isActive ? "text-white" : "text-gray-200 group-hover:text-white"
+                      }`}>
+                        {step.title}
+                      </h4>
+                      <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-6">
+                        {step.description}
+                      </p>
+                    </div>
+
+                    {/* Card Footer Progress / Indicator */}
+                    <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                      <span className={`text-[11px] font-semibold transition-colors flex items-center gap-1.5 ${
+                        isActive ? "text-cyan-400" : "text-gray-500 group-hover:text-gray-300"
+                      }`}>
+                        <span className={`w-1.5 h-1.5 rounded-full transition-all ${
+                          isActive ? "bg-cyan-400 animate-ping" : "bg-indigo-500"
+                        }`} />
+                        Phase 0{idx + 1}
+                      </span>
+
+                      <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                        isActive 
+                          ? "bg-cyan-400 text-charcoal-950 shadow-[0_0_12px_#22d3ee]" 
+                          : "bg-white/5 text-gray-400 group-hover:text-white group-hover:bg-indigo-600"
+                      }`}>
+                        →
+                      </div>
+                    </div>
+
+                    {/* Active Step Inner Bottom Progress Bar */}
+                    {isActive && (
+                      <motion.div 
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 3.5, ease: "linear" }}
+                        className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-cyan-400 via-indigo-400 to-cyan-400 rounded-full"
+                      />
+                    )}
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </motion.div>
 
       </div>
 

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import PhoneMockupBasic from "@/components/ui/phone-mockups-1";
 import SocialCards from "@/components/ui/card-fan-carousel";
 import { FadeIn } from "@/components/ui/motion-container";
-import { Smartphone, Layers, Sparkles, X, Eye } from "lucide-react";
+import { Smartphone, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -72,22 +72,9 @@ const PORTFOLIO_PROJECTS = [
   },
 ];
 
-const categories = [
-  { label: "All Work", key: "all" },
-  { label: "Web & Apps", key: "app" },
-  { label: "Brand Identity", key: "brand" },
-  { label: "Motion & Ads", key: "motion" },
-  { label: "UI/UX Systems", key: "uiux" },
-];
-
 export default function Portfolio() {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [activeTab, setActiveTab] = useState<"grid" | "mockup" | "fan">("grid");
+  const [activeTab, setActiveTab] = useState<"mockup" | "fan">("mockup");
   const [selectedProject, setSelectedProject] = useState<typeof PORTFOLIO_PROJECTS[0] | null>(null);
-
-  const filteredProjects = activeCategory === "all" 
-    ? PORTFOLIO_PROJECTS 
-    : PORTFOLIO_PROJECTS.filter(p => p.categoryKey === activeCategory);
 
   return (
     <section id="portfolio" className="py-24 md:py-32 relative overflow-hidden bg-background">
@@ -110,36 +97,8 @@ export default function Portfolio() {
               Explore our mobile applications, UI/UX systems, brand identity campaigns, and high-converting visual assets.
             </p>
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
-              {categories.map((cat) => (
-                <button
-                  key={cat.key}
-                  onClick={() => setActiveCategory(cat.key)}
-                  className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
-                    activeCategory === cat.key
-                      ? "bg-white text-black shadow-lg shadow-white/20 font-semibold"
-                      : "bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10"
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-
             {/* View Mode Toggle Buttons */}
-            <div className="flex items-center justify-center gap-2 mt-6 p-1.5 bg-charcoal-900/90 backdrop-blur-md rounded-full border border-white/10 w-fit mx-auto shadow-xl">
-              <Button
-                variant={activeTab === "grid" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setActiveTab("grid")}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
-                  activeTab === "grid" ? "shadow-md bg-indigo-600 text-white" : "text-gray-400 hover:text-white"
-                }`}
-              >
-                <Layers className="h-3.5 w-3.5 mr-1.5" />
-                Studio Gallery
-              </Button>
+            <div className="flex items-center justify-center gap-2 mt-8 p-1.5 bg-charcoal-900/90 backdrop-blur-md rounded-full border border-white/10 w-fit mx-auto shadow-xl">
               <Button
                 variant={activeTab === "mockup" ? "default" : "ghost"}
                 size="sm"
@@ -168,56 +127,6 @@ export default function Portfolio() {
 
         {/* Portfolio Content */}
         <div className="w-full flex justify-center items-center min-h-[500px] mt-4">
-          {activeTab === "grid" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-              {filteredProjects.map((project) => (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => setSelectedProject(project)}
-                  className="bento-card group cursor-pointer overflow-hidden border border-white/10 hover:border-cyan-500/40"
-                >
-                  <div className="relative h-60 w-full overflow-hidden">
-                    <img
-                      src={project.imgUrl}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-                    
-                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[11px] font-medium text-cyan-400">
-                      {project.category}
-                    </span>
-
-                    <div className="absolute bottom-4 right-4 p-2 rounded-full bg-cyan-500/20 backdrop-blur-md border border-cyan-500/30 text-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Eye className="w-4 h-4" />
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <div className="text-[11px] uppercase tracking-wider text-gray-400 font-semibold mb-1">
-                      {project.client}
-                    </div>
-                    <h3 className="font-heading text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-400 text-xs line-clamp-2 leading-relaxed mb-4">
-                      {project.description}
-                    </p>
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-                      <span>Key Impact:</span>
-                      <span>{project.results}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
-
           {activeTab === "mockup" && (
             <FadeIn direction="up" className="w-full">
               <PhoneMockupBasic />
