@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   keywords: ["XyvorA", "smart creative solutions", "freelance agency", "web design", "digital marketing", "creative services", "brand growth", "UI/UX design", "web development"],
 };
 
-import WhatsAppButton from "@/components/WhatsAppButton";
+import SmoothScrollProvider from "@/components/providers/smooth-scroll-provider";
 
 export default function RootLayout({
   children,
@@ -22,9 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} bg-background text-foreground antialiased`}>
-        {children}
-        <WhatsAppButton />
-        <GoogleAnalytics gaId="G-6Z2J40B37H" />
+        <SmoothScrollProvider>
+          {children}
+          <GoogleAnalytics gaId="G-6Z2J40B37H" />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

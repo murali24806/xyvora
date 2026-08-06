@@ -65,12 +65,12 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         sender: {
           name: "XyvorA Website",
-          email: "saipatnala248@gmail.com" // Using verified email as sender
+          email: "xyvoratech@gmail.com" // Using verified email as sender
         },
         to: [
           {
-            email: "saipatnala248@gmail.com",
-            name: "Sai Patnala"
+            email: "xyvoratech@gmail.com",
+            name: "XyvorA Team"
           }
         ],
         replyTo: {
@@ -133,7 +133,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         sender: {
           name: "XyvorA",
-          email: "saipatnala248@gmail.com" // Verified sender email
+          email: "xyvoratech@gmail.com" // Verified sender email
         },
         to: [
           {

@@ -56,8 +56,8 @@ export default function HoverFooter() {
   const contactInfo = [
     {
       icon: <Mail size={18} className="text-[#3ca2fa]" />,
-      text: "saipatnala248@gmail.com",
-      href: "mailto:saipatnala248@gmail.com",
+      text: "xyvoratech@gmail.com",
+      href: "mailto:xyvoratech@gmail.com",
     },
     {
       icon: <Phone size={18} className="text-[#3ca2fa]" />,

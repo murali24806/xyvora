@@ -107,7 +107,7 @@ export default function Contact() {
 
               <div className="space-y-6">
                 {[
-                  { icon: Mail, title: "Email Us", detail: "saipatnala248@gmail.com", href: "mailto:saipatnala248@gmail.com" },
+                  { icon: Mail, title: "Email Us", detail: "xyvoratech@gmail.com", href: "mailto:xyvoratech@gmail.com" },
                   { icon: Phone, title: "Call Us", detail: "+91 73821 83616 / +91 89190 09613", href: "tel:+917382183616" },
                   { icon: MapPin, title: "Location", detail: "Visakhapatnam", href: null },
                 ].map((item, index) => (
