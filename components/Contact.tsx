@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { MessageCircle, Send, Mail, Phone, MapPin, Sparkles, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
+
 
 const serviceOptions = [
   "Website Designing",

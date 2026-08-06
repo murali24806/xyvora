@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Sparkles, ArrowRight, Compass } from "lucide-react";
+import { Menu, X, Sparkles, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./Logo";
 import Link from "next/link";
@@ -15,16 +15,14 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
-
       const sections = ["home", "services", "portfolio", "testimonials", "contact"];
       const scrollPosition = window.scrollY + 200;
+
 
       for (const section of sections) {
         const element = document.getElementById(section);

@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import PhoneMockupBasic from "@/components/ui/phone-mockups-1";
 import SocialCards from "@/components/ui/card-fan-carousel";
 import { FadeIn } from "@/components/ui/motion-container";
-import { Smartphone, Layers, Sparkles, ExternalLink, X, Tag, Eye } from "lucide-react";
+import { Smartphone, Layers, Sparkles, X, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+
 
 const PORTFOLIO_PROJECTS = [
   {
