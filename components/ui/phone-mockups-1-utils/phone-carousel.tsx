@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence, PanInfo } from "framer-motion";
+import { motion, AnimatePresence, PanInfo, Variants } from "framer-motion";
 import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -50,7 +50,7 @@ export function PhoneCarousel({
     return () => clearInterval(timer);
   }, [isPlaying, autoPlayInterval, handleNext]);
 
-  const handleDragEnd = (_: any, info: PanInfo) => {
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
     const swipeThreshold = 50;
     if (info.offset.x < -swipeThreshold) {
       handleNext();
@@ -61,7 +61,7 @@ export function PhoneCarousel({
 
   const activeItem = images[currentIndex] || images[0];
 
-  const slideVariants = {
+  const slideVariants: Variants = {
     enter: (dir: number) => ({
       x: dir > 0 ? "100%" : "-100%",
       opacity: 0.2,
@@ -72,7 +72,7 @@ export function PhoneCarousel({
       opacity: 1,
       scale: 1,
       transition: {
-        x: { type: "spring", stiffness: 300, damping: 30 },
+        x: { type: "spring" as const, stiffness: 300, damping: 30 },
         opacity: { duration: 0.3 },
       },
     },
@@ -81,7 +81,7 @@ export function PhoneCarousel({
       opacity: 0.2,
       scale: 0.95,
       transition: {
-        x: { type: "spring", stiffness: 300, damping: 30 },
+        x: { type: "spring" as const, stiffness: 300, damping: 30 },
         opacity: { duration: 0.3 },
       },
     }),
