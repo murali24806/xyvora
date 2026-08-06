@@ -61,14 +61,20 @@ export default function HoverFooter() {
     },
     {
       icon: <Phone size={18} className="text-[#3ca2fa]" />,
-      text: "+91 73821 83616 / +91 89190 09613",
+      text: "+91 73821 83616",
       href: "tel:+917382183616",
     },
     {
+      icon: <Phone size={18} className="text-[#3ca2fa]" />,
+      text: "+91 89190 09613",
+      href: "tel:+918919009613",
+    },
+    {
       icon: <MapPin size={18} className="text-[#3ca2fa]" />,
-      text: "Visakhapatnam",
+      text: "Visakhapatnam, India",
     },
   ];
+
 
   // Social media icons
   const socialLinks = [
