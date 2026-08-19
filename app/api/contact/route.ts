@@ -1,8 +1,66 @@
 import { NextResponse } from 'next/server';
 
+// Simple in-memory rate limiting (Note: in a serverless environment like Vercel, this is per-instance)
+const rateLimit = new Map<string, { count: number; lastReset: number }>();
+const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 3; // Max 3 requests per minute per IP
+
+// Utility to escape HTML entities to prevent XSS in emails
+const escapeHTML = (str?: string) => {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
+// Basic email validation regex
+const isValidEmail = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
 export async function POST(req: Request) {
   try {
+    // -------------------------------------------------------------
+    // Rate Limiting
+    // -------------------------------------------------------------
+    const ip = req.headers.get('x-forwarded-for') || 'unknown';
+    
+    if (ip !== 'unknown') {
+      const now = Date.now();
+      const ipData = rateLimit.get(ip) || { count: 0, lastReset: now };
+
+      if (now - ipData.lastReset > RATE_LIMIT_WINDOW_MS) {
+        ipData.count = 1;
+        ipData.lastReset = now;
+      } else {
+        ipData.count++;
+      }
+
+      rateLimit.set(ip, ipData);
+
+      if (ipData.count > MAX_REQUESTS_PER_WINDOW) {
+        console.warn(`Rate limit exceeded for IP: ${ip}`);
+        return NextResponse.json(
+          { error: "Too many requests. Please try again later." },
+          { status: 429 }
+        );
+      }
+    }
+
     const body = await req.json();
+    
+    // -------------------------------------------------------------
+    // Input Validation
+    // -------------------------------------------------------------
+    if (!body.email || !isValidEmail(body.email)) {
+       return NextResponse.json(
+        { error: "Invalid email address" },
+        { status: 400 }
+      );
+    }
     
     // Check if the API key is configured
     if (!process.env.BREVO_API_KEY) {
@@ -13,11 +71,23 @@ export async function POST(req: Request) {
       );
     }
 
+    // -------------------------------------------------------------
+    // Input Sanitization (Escaping HTML)
+    // -------------------------------------------------------------
+    const safeName = escapeHTML(body.name);
+    const safeEmail = escapeHTML(body.email);
+    const safePhone = escapeHTML(body.phone);
+    const safeCompany = escapeHTML(body.company);
+    const safeService = escapeHTML(body.service);
+    const safeDate = escapeHTML(body.date);
+    const safeTime = escapeHTML(body.time);
+    const safeMessage = escapeHTML(body.message);
+
     // Determine the subject based on the form type
     const isBooking = body.type === 'booking';
     const subject = isBooking 
-      ? `New Slot Booking: ${body.service} - ${body.name}`
-      : `New Contact Inquiry from ${body.name}`;
+      ? `New Slot Booking: ${safeService} - ${safeName}`
+      : `New Contact Inquiry from ${safeName}`;
 
     // Construct the email HTML content
     let htmlContent = `
@@ -27,21 +97,21 @@ export async function POST(req: Request) {
         </h2>
         
         <div style="margin-top: 20px;">
-          <p><strong>Name:</strong> ${body.name}</p>
-          <p><strong>Email:</strong> ${body.email}</p>
+          <p><strong>Name:</strong> ${safeName}</p>
+          <p><strong>Email:</strong> ${safeEmail}</p>
     `;
 
-    if (body.phone) htmlContent += `<p><strong>Phone:</strong> ${body.phone}</p>`;
-    if (body.company) htmlContent += `<p><strong>Company:</strong> ${body.company}</p>`;
-    if (body.service) htmlContent += `<p><strong>Service Requested:</strong> ${body.service}</p>`;
-    if (body.date) htmlContent += `<p><strong>Preferred Date:</strong> ${body.date}</p>`;
-    if (body.time) htmlContent += `<p><strong>Preferred Time:</strong> ${body.time}</p>`;
+    if (safePhone) htmlContent += `<p><strong>Phone:</strong> ${safePhone}</p>`;
+    if (safeCompany) htmlContent += `<p><strong>Company:</strong> ${safeCompany}</p>`;
+    if (safeService) htmlContent += `<p><strong>Service Requested:</strong> ${safeService}</p>`;
+    if (safeDate) htmlContent += `<p><strong>Preferred Date:</strong> ${safeDate}</p>`;
+    if (safeTime) htmlContent += `<p><strong>Preferred Time:</strong> ${safeTime}</p>`;
     
-    if (body.message) {
+    if (safeMessage) {
       htmlContent += `
         <div style="margin-top: 20px; padding: 15px; background-color: #f9f9f9; border-left: 4px solid #6d28d9; border-radius: 4px;">
           <strong>Project Details/Message:</strong><br/>
-          <p style="white-space: pre-wrap;">${body.message}</p>
+          <p style="white-space: pre-wrap;">${safeMessage}</p>
         </div>
       `;
     }
@@ -74,7 +144,7 @@ export async function POST(req: Request) {
           }
         ],
         replyTo: {
-          email: body.email,
+          email: body.email, // Unescaped for actual delivery
           name: body.name
         },
         subject: subject,
@@ -95,7 +165,7 @@ export async function POST(req: Request) {
     // Send Auto-Responder to the Customer
     // -------------------------------------------------------------
     const customerSubject = isBooking 
-      ? `Booking Confirmation: ${body.service} with XyvorA`
+      ? `Booking Confirmation: ${safeService} with XyvorA`
       : `We received your message - XyvorA`;
 
     const customerHtmlContent = `
@@ -105,15 +175,15 @@ export async function POST(req: Request) {
         </h2>
         
         <div style="margin-top: 20px;">
-          <p>Hi ${body.name},</p>
+          <p>Hi ${safeName},</p>
           <p>Thank you for contacting XyvorA! This email is to confirm that we have successfully received your ${isBooking ? 'booking request' : 'message'}.</p>
           
           ${isBooking ? `
             <div style="padding: 15px; background-color: #f9f9f9; border-left: 4px solid #6d28d9; border-radius: 4px; margin: 20px 0;">
               <strong>Your Booking Details:</strong><br/><br/>
-              <strong>Service:</strong> ${body.service}<br/>
-              <strong>Date:</strong> ${body.date}<br/>
-              <strong>Time:</strong> ${body.time}
+              <strong>Service:</strong> ${safeService}<br/>
+              <strong>Date:</strong> ${safeDate}<br/>
+              <strong>Time:</strong> ${safeTime}
             </div>
           ` : ''}
           
@@ -137,7 +207,7 @@ export async function POST(req: Request) {
         },
         to: [
           {
-            email: body.email,
+            email: body.email, // Unescaped for actual delivery
             name: body.name
           }
         ],
