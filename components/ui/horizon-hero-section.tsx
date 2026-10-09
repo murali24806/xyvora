@@ -4,11 +4,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// @ts-expect-error
+// @ts-expect-error - no types available for this module
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-// @ts-expect-error
+// @ts-expect-error - no types available for this module
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-// @ts-expect-error
+// @ts-expect-error - no types available for this module
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 
 gsap.registerPlugin(ScrollTrigger);
