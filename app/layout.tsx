@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Outfit } from "next/font/google";
 import { GoogleAnalytics } from '@next/third-parties/google';
 import "./globals.css";
+import "./fluxora.css";
 import SmoothScrollProvider from "@/components/providers/smooth-scroll-provider";
 
 const jakarta = Plus_Jakarta_Sans({ 

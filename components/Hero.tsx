@@ -1,113 +1,134 @@
 "use client";
 
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowRight, Globe, partners } from './icons'
 
-const INK = '#1f1f1f'
 const stats = [
   { value: "50+", label: "Projects Delivered" },
-  { value: "30+", label: "Happy Clients" },
-  { value: "100+", label: "Designs Created" },
   { value: "99.8%", label: "Client Satisfaction" },
-];
+]
+
+const bars = [34, 52, 44, 70, 88]
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    // Some browsers block autoplay until the element is explicitly nudged.
+    const play = video.play()
+    if (play?.catch) play.catch(() => {})
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.pause()
+      setReady(true)
+    }
+  }, [])
+
   return (
-    <section id="home" className="relative w-full h-[100vh] overflow-hidden">
-      <video className="absolute inset-0 w-full h-full object-cover" src="/hero.mp4" autoPlay muted loop playsInline />
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-black/15" />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.17) 0%, transparent 22%, transparent 60%, rgba(0,0,0,0.25) 100%)' }} />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.10) 0%, transparent 18%, transparent 82%, rgba(0,0,0,0.10) 100%)' }} />
-      <div className="absolute top-[-14%] left-1/2 -translate-x-1/2 w-[1000px] h-[720px] pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 30%, rgba(55,48,163,0.05) 0%, transparent 68%)' }} />
-
-      {/* Top-anchored content */}
-      <div className="relative z-10 h-full flex flex-col items-center text-center pt-[15vh] px-4 md:px-8">
-        {/* Eyebrow */}
-        <motion.span
-          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-          className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-white/35 border border-white/50 mb-5 text-[11px] font-medium text-gray-800"
-          style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
-        >
-          XyvorA Creative Studio
-        </motion.span>
-
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.22, ease: 'easeOut' }}
-          style={{ margin: 0, fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', lineHeight: 1.08, letterSpacing: '-0.025em', color: INK }}
-        >
-          Smart Creative Solutions
-        </motion.h1>
-
-        {/* Subtext */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.38, ease: 'easeOut' }}
-          className="mt-4 max-w-[460px] text-sm md:text-[15px] leading-relaxed font-medium text-gray-800/80 px-2"
-        >
-          XyvorA is a premier creative freelance studio. We engineer striking visual brand identities, high-converting web apps, and immersive motion design to accelerate your growth.
-        </motion.p>
-
-        {/* Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.52, ease: 'easeOut' }}
-          className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-7 w-full sm:w-auto px-6 sm:px-0"
-        >
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="w-full sm:w-auto px-6 py-3 rounded-[9px] text-sm font-semibold text-white no-underline bg-[#1a1a1a] shadow-lg flex justify-center"
-            style={{ fontFamily: "'Inter', sans-serif", boxShadow: '0 6px 20px rgba(0,0,0,0.22)' }}
-          >
-            Estimate Project
-          </motion.a>
-          <motion.a
-            href="#portfolio"
-            whileHover={{ scale: 1.04, background: 'rgba(255,255,255,0.85)' }}
-            whileTap={{ scale: 0.97 }}
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="w-full sm:w-auto px-6 py-3 rounded-[9px] text-sm font-semibold no-underline bg-white/65 border border-white/70 flex justify-center"
-            style={{ color: INK, fontFamily: "'Inter', sans-serif", backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
-          >
-            Explore Portfolio
-          </motion.a>
-        </motion.div>
+    <section id="home" className="hero">
+      <div className="hero__media">
+        <video
+          ref={videoRef}
+          className={`hero__video ${ready ? 'is-ready' : ''}`}
+          src="/hero-loop.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          onCanPlay={() => setReady(true)}
+        />
+        <div className="hero__scrim" aria-hidden="true" />
+        <div className="hero__rules" aria-hidden="true">
+          <span /><span /><span />
+        </div>
       </div>
 
-      {/* Stats strip */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.7, ease: 'easeOut' }}
-        className="absolute bottom-0 left-0 right-0 z-10 pb-8 pt-5 px-4 md:px-6 text-center bg-gradient-to-t from-black/40 to-transparent"
-      >
-        <div className="flex items-center justify-center gap-6 md:gap-12 flex-wrap max-w-[820px] mx-auto">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex flex-col items-center"
-            >
-              <span
-                className="text-[16px] md:text-[18px] font-bold tracking-wide text-white/80 transition-colors cursor-default hover:text-white"
-                style={{ textShadow: '0 1px 10px rgba(0,0,0,0.5)' }}
-              >
-                {stat.value}
-              </span>
-              <span 
-                className="text-[10px] md:text-[11px] tracking-wider uppercase text-white/70 mt-1"
-                style={{ textShadow: '0 1px 10px rgba(0,0,0,0.5)' }}
-              >
-                {stat.label}
+      <div className="hero__inner">
+        <div className="hero__lead">
+          <p className="hero__note">
+            <Globe className="hero__note-icon" />
+            <span>XyvorA Creative Studio<br />Crafting Digital Experiences</span>
+          </p>
+
+          <h1 className="hero__title">
+            Smart<br />
+            Creative<br />
+            <em>Solutions</em>
+          </h1>
+
+          <p className="hero__sub">
+            XyvorA is a premier creative freelance studio. We engineer striking visual brand identities, high-converting web apps, and immersive motion design to accelerate your growth.
+          </p>
+
+          <div className="hero__cta">
+            <a className="btn btn--flame hero__go" href="#contact">
+              Estimate Project
+              <span className="hero__go-dot" aria-hidden="true"><ArrowRight /></span>
+            </a>
+
+            <div className="hero__proof">
+              <div className="hero__faces" aria-hidden="true">
+                <i style={{ '--a': '#ff7a3d', '--b': '#ffb27a' } as React.CSSProperties} />
+                <i style={{ '--a': '#6f4bd8', '--b': '#a98cff' } as React.CSSProperties} />
+                <i style={{ '--a': '#1f9ea8', '--b': '#63d6df' } as React.CSSProperties} />
+                <i style={{ '--a': '#d8434b', '--b': '#ff8a8f' } as React.CSSProperties} />
+              </div>
+              <span className="hero__proof-text">
+                <strong>30+ Happy Clients</strong>
+                100+ Designs Created
               </span>
             </div>
-          ))}
+          </div>
+
+          <ul className="hero__stats">
+            {stats.map((stat) => (
+              <li key={stat.label} className="stat">
+                <span className="stat__mark" aria-hidden="true">*</span>
+                <span className="stat__value">{stat.value}</span>
+                <span className="stat__label">{stat.label}</span>
+                <span className="stat__rule" aria-hidden="true" />
+              </li>
+            ))}
+          </ul>
         </div>
-      </motion.div>
+
+        <aside className="hero__ghost" aria-hidden="true">
+          <div className="ghost__row">
+            <div className="ghost__bars">
+              {bars.map((h, i) => (
+                <span key={i} style={{ height: `${h}%` }} />
+              ))}
+            </div>
+            <p className="ghost__kpi"><strong>+42%</strong>Experience<br />Performance</p>
+          </div>
+          <h2 className="ghost__title">Measure Real Impact</h2>
+          <p className="ghost__copy">
+            We track user response through meaningful metrics and
+            refine every detail until the experience feels effortless.
+          </p>
+        </aside>
+      </div>
+
+      <div className="hero__foot">
+        <span className="hero__watermark" aria-hidden="true">AIM</span>
+        <div className="hero__partners">
+          <span className="hero__partners-label">Our Partners</span>
+          <ul>
+            {partners.map((partner) => (
+              <li key={partner.name}>
+                {partner.mark}
+                <span>{partner.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </section>
   )
 }
