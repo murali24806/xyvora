@@ -524,3 +524,12 @@
   .hero__stats,
   .hero__foot { animation: none; }
 }
+
+@media (max-width: 480px) {
+  .hero__title { font-size: 2.3rem; }
+  .hero__inner { gap: 24px; }
+  .hero__cta { gap: 16px; }
+  .stat { flex: 1 1 100%; min-height: 110px; }
+  .nav { padding: clamp(10px, 1.5vw, 16px) clamp(16px, 2.6vw, 24px); }
+  .nav__brand { font-size: 16px; }
+}
