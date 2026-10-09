@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react'
-import { ArrowRight, Globe, partners } from './icons'
+import { ArrowRight, Globe } from './icons'
 
 const stats = [
   { value: "50+", label: "Projects Delivered" },
@@ -117,17 +117,6 @@ export default function Hero() {
 
       <div className="hero__foot">
         <span className="hero__watermark" aria-hidden="true">AIM</span>
-        <div className="hero__partners">
-          <span className="hero__partners-label">Our Partners</span>
-          <ul>
-            {partners.map((partner) => (
-              <li key={partner.name}>
-                {partner.mark}
-                <span>{partner.name}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   )
