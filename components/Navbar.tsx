@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react'
-import { Chevron, Close, Logo, Menu } from './icons'
+import { Close, Logo, Menu } from './icons'
 
 const links = [
   { label: 'Home', href: '#home' },

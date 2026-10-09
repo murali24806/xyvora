@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const Logo = (props: any) => (
   <svg viewBox="0 0 28 28" fill="none" aria-hidden="true" {...props}>
     <path d="M14 1.6 20.3 8 14 14.4 7.7 8 14 1.6Z" fill="#FF6A00" />
