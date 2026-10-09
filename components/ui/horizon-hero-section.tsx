@@ -4,11 +4,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// @ts-ignore
+// @ts-expect-error
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-// @ts-ignore
+// @ts-expect-error
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-// @ts-ignore
+// @ts-expect-error
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,7 +22,7 @@ export const HorizonHeroSection = () => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const smoothCameraPos = useRef({ x: 0, y: 30, z: 100 });
-  const cameraVelocity = useRef({ x: 0, y: 0, z: 0 });
+
   
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentSection, setCurrentSection] = useState(0);
@@ -561,7 +561,7 @@ export const HorizonHeroSection = () => {
         
         // Use the same smoothing approach
         mountain.userData.targetZ = targetZ;
-        const location = mountain.position.z
+
         if (progress > 0.7) {
           mountain.position.z = 600000;
         }
