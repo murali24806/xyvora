@@ -20,22 +20,22 @@ export function TestimonialsSection({
 }: TestimonialsSectionProps) {
   return (
     <section className={cn(
-      "bg-charcoal-950 text-white",
+      "bg-gray-50 text-[#1f1f1f]",
       "py-16 sm:py-24 md:py-32 px-0 relative overflow-hidden",
       className
     )}>
       {/* Background Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[500px] sm:h-[700px] bg-purple-600/10 rounded-full blur-[120px] sm:blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[500px] sm:h-[700px] bg-purple-100/50 rounded-full blur-[120px] sm:blur-[150px] pointer-events-none" />
 
       <div className="mx-auto flex max-w-container flex-col items-center gap-6 text-center sm:gap-12 relative z-10">
         <div className="flex flex-col items-center gap-2.5 px-4 sm:gap-4 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-1 sm:mb-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border border-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-1 sm:mb-2 shadow-sm">
             <span>Verified Client Reviews</span>
           </div>
-          <h2 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#1f1f1f] tracking-tight">
             {title}
           </h2>
-          <p className="text-gray-400 text-xs sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-gray-600 text-xs sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed">
             {description}
           </p>
         </div>
@@ -56,8 +56,8 @@ export function TestimonialsSection({
           </div>
 
           {/* Left/Right Edge Fades (Mobile & Desktop) */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-36 bg-gradient-to-r from-charcoal-950 to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-36 bg-gradient-to-l from-charcoal-950 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-36 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-36 bg-gradient-to-l from-gray-50 to-transparent z-10" />
         </div>
       </div>
     </section>

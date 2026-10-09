@@ -87,22 +87,22 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-charcoal-950 relative overflow-hidden">
+    <section id="services" className="py-24 md:py-32 bg-gray-50/50 relative overflow-hidden">
       {/* Background Radial Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-indigo-100/50 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         
         {/* Section Header */}
         <div className="text-center mb-14 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/60 border border-black/5 text-[#1f1f1f] text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5" />
             <span>End-to-End Capabilities</span>
           </div>
-          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-white tracking-tight">
-            Crafted for <span className="text-gradient">Maximum Growth</span>
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-[#1f1f1f] tracking-tight">
+            Crafted for <span className="text-indigo-600">Maximum Growth</span>
           </h2>
-          <p className="text-gray-400 text-base md:text-lg max-w-xl mx-auto">
+          <p className="text-gray-600 text-base md:text-lg max-w-xl mx-auto">
             From high-converting web applications to visual brand identities, we deliver full-stack creative execution.
           </p>
         </div>
@@ -118,7 +118,7 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mt-28 pt-20 border-t border-white/10 relative"
+          className="mt-28 pt-20 border-t border-black/5 relative"
         >
           {/* Header with Animation */}
           <div className="text-center max-w-2xl mx-auto mb-14 relative">
@@ -127,16 +127,16 @@ export default function Services() {
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-4"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm"
             >
-              <Zap className="h-3.5 w-3.5 animate-pulse text-cyan-400" />
+              <Zap className="h-3.5 w-3.5 animate-pulse text-cyan-600" />
               <span>Live Execution Progress Tracker</span>
             </motion.div>
             
-            <h3 className="font-heading text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
-              Our 4-Step <span className="text-gradient">Execution Blueprint</span>
+            <h3 className="font-heading text-2xl md:text-4xl font-extrabold text-[#1f1f1f] tracking-tight mb-3">
+              Our 4-Step <span className="text-indigo-600">Execution Blueprint</span>
             </h3>
-            <p className="text-gray-400 text-sm md:text-base">
+            <p className="text-gray-500 text-sm md:text-base">
               Interactive timeline tracking: hover or tap any step to inspect our agency process in real-time.
             </p>
           </div>
@@ -144,10 +144,10 @@ export default function Services() {
           {/* DESKTOP HORIZONTAL TRACKING BAR (>= lg) */}
           <div className="hidden lg:block relative mb-12 max-w-5xl mx-auto px-4">
             {/* Background Rail */}
-            <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden relative">
+            <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden relative">
               {/* Dynamic Animated Active Beam */}
               <motion.div 
-                className="h-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400 shadow-[0_0_15px_#22d3ee]"
+                className="h-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400"
                 animate={{ width: `${((activeStep + 1) / processSteps.length) * 100}%` }}
                 transition={{ type: "spring", stiffness: 90, damping: 18 }}
               />
@@ -163,14 +163,14 @@ export default function Services() {
                     <div 
                       className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-500 ${
                         isActive
-                          ? "bg-cyan-400 shadow-[0_0_20px_#22d3ee] scale-125 border-2 border-white"
+                          ? "bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] scale-125 border-2 border-white"
                           : isPassed
-                          ? "bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.6)]"
-                          : "bg-charcoal-900 border border-white/20"
+                          ? "bg-indigo-500"
+                          : "bg-white border-2 border-gray-200"
                       }`}
                     >
                       {isActive && (
-                        <span className="w-2 h-2 rounded-full bg-charcoal-950 animate-ping" />
+                        <span className="w-2 h-2 rounded-full bg-white animate-ping" />
                       )}
                     </div>
                   </div>
@@ -182,9 +182,9 @@ export default function Services() {
           {/* PROCESS CARDS GRID (Responsive: Vertical tracking rail on Mobile, 4-col on Desktop) */}
           <div className="relative pl-10 sm:pl-14 lg:pl-0">
             {/* MOBILE VERTICAL TRACKING RAIL (< lg) */}
-            <div className="block lg:hidden absolute left-3.5 sm:left-5 top-6 bottom-6 w-1 bg-white/10 rounded-full overflow-hidden pointer-events-none">
+            <div className="block lg:hidden absolute left-3.5 sm:left-5 top-6 bottom-6 w-1 bg-gray-200 rounded-full overflow-hidden pointer-events-none">
               <motion.div 
-                className="w-full bg-gradient-to-b from-indigo-500 via-cyan-400 to-emerald-400 shadow-[0_0_15px_#22d3ee]"
+                className="w-full bg-gradient-to-b from-indigo-500 via-cyan-400 to-emerald-400"
                 animate={{ height: `${((activeStep + 1) / processSteps.length) * 100}%` }}
                 transition={{ type: "spring", stiffness: 90, damping: 18 }}
               />
@@ -204,10 +204,10 @@ export default function Services() {
                     onMouseEnter={() => { setIsPaused(true); setActiveStep(idx); }}
                     onMouseLeave={() => setIsPaused(false)}
                     onClick={() => setActiveStep(idx)}
-                    className={`relative p-7 rounded-2xl transition-all duration-500 cursor-pointer flex flex-col justify-between group ${
+                    className={`relative p-7 rounded-2xl transition-all duration-500 cursor-pointer flex flex-col justify-between group overflow-hidden ${
                       isActive
-                        ? "bg-gradient-to-b from-indigo-950/80 via-charcoal-900/95 to-charcoal-900 border-2 border-cyan-400/80 shadow-[0_0_40px_rgba(34,211,238,0.25)] -translate-y-2 scale-[1.02]"
-                        : "bg-charcoal-900/70 backdrop-blur-xl border border-white/10 hover:border-white/20 hover:bg-charcoal-900/90"
+                        ? "bg-white border border-cyan-200 shadow-[0_10px_40px_rgba(34,211,238,0.15)] -translate-y-2 scale-[1.02]"
+                        : "bg-white/60 backdrop-blur-md border border-black/5 hover:bg-white hover:shadow-lg"
                     }`}
                   >
                     {/* Mobile Node Marker Dot on Left Rail */}
@@ -215,40 +215,40 @@ export default function Services() {
                       <div 
                         className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${
                           isActive
-                            ? "bg-cyan-400 shadow-[0_0_15px_#22d3ee] scale-125 border-2 border-white"
+                            ? "bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)] scale-125 border-2 border-white"
                             : activeStep >= idx
-                            ? "bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]"
-                            : "bg-charcoal-900 border border-white/20"
+                            ? "bg-indigo-500"
+                            : "bg-white border-2 border-gray-200"
                         }`}
                       >
                         {isActive && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-charcoal-950 animate-ping" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                         )}
                       </div>
                     </div>
 
                     {/* Top Inner Glow Overlay */}
-                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent transition-opacity duration-300 pointer-events-none ${
-                      isActive ? "opacity-100" : "opacity-0 group-hover:opacity-40"
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-b from-cyan-50/50 via-transparent to-transparent transition-opacity duration-300 pointer-events-none ${
+                      isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                     }`} />
 
-                    <div>
+                    <div className="relative z-10">
                       {/* Card Header */}
                       <div className="flex items-center justify-between mb-5">
                         <span className={`text-4xl font-extrabold font-heading transition-all duration-300 ${
-                          isActive ? "text-cyan-400 scale-110" : "text-white/20 group-hover:text-white/40"
+                          isActive ? "text-cyan-500 scale-110" : "text-gray-200 group-hover:text-gray-300"
                         }`}>
                           {step.number}
                         </span>
                         
                         {isActive ? (
-                          <span className="px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-[10px] font-extrabold text-cyan-300 flex items-center gap-1.5 animate-pulse shadow-sm shadow-cyan-500/20">
-                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                          <span className="px-2.5 py-1 rounded-full bg-cyan-50 border border-cyan-100 text-[10px] font-extrabold text-cyan-600 flex items-center gap-1.5 animate-pulse shadow-sm">
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping" />
                             LIVE TRACKING
                           </span>
                         ) : (
-                          <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-indigo-500/20 transition-all duration-300">
-                            <div className="text-indigo-400 group-hover:text-cyan-300 transition-colors">
+                          <div className="p-3 rounded-2xl bg-gray-50 border border-gray-100 group-hover:bg-indigo-50 transition-all duration-300">
+                            <div className="text-indigo-400 group-hover:text-indigo-500 transition-colors">
                               {step.icon}
                             </div>
                           </div>
@@ -257,30 +257,30 @@ export default function Services() {
 
                       {/* Title & Description */}
                       <h4 className={`font-heading text-lg md:text-xl font-bold mb-2.5 transition-colors ${
-                        isActive ? "text-white" : "text-gray-200 group-hover:text-white"
+                        isActive ? "text-[#1f1f1f]" : "text-gray-700 group-hover:text-[#1f1f1f]"
                       }`}>
                         {step.title}
                       </h4>
-                      <p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-6">
+                      <p className="text-gray-500 text-xs md:text-sm leading-relaxed mb-6">
                         {step.description}
                       </p>
                     </div>
 
                     {/* Card Footer Progress / Indicator */}
-                    <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                    <div className="pt-4 border-t border-gray-100 flex items-center justify-between relative z-10">
                       <span className={`text-[11px] font-semibold transition-colors flex items-center gap-1.5 ${
-                        isActive ? "text-cyan-400" : "text-gray-500 group-hover:text-gray-300"
+                        isActive ? "text-cyan-600" : "text-gray-400 group-hover:text-gray-500"
                       }`}>
                         <span className={`w-1.5 h-1.5 rounded-full transition-all ${
-                          isActive ? "bg-cyan-400 animate-ping" : "bg-indigo-500"
+                          isActive ? "bg-cyan-500 animate-ping" : "bg-gray-300 group-hover:bg-indigo-400"
                         }`} />
                         Phase 0{idx + 1}
                       </span>
 
                       <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                         isActive 
-                          ? "bg-cyan-400 text-charcoal-950 shadow-[0_0_12px_#22d3ee]" 
-                          : "bg-white/5 text-gray-400 group-hover:text-white group-hover:bg-indigo-600"
+                          ? "bg-cyan-500 text-white shadow-[0_4px_10px_rgba(6,182,212,0.3)]" 
+                          : "bg-gray-100 text-gray-400 group-hover:text-white group-hover:bg-indigo-500"
                       }`}>
                         →
                       </div>
@@ -292,7 +292,7 @@ export default function Services() {
                         initial={{ width: "0%" }}
                         animate={{ width: "100%" }}
                         transition={{ duration: 3.5, ease: "linear" }}
-                        className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-cyan-400 via-indigo-400 to-cyan-400 rounded-full"
+                        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-indigo-400 to-cyan-400"
                       />
                     )}
                   </motion.div>
@@ -313,34 +313,34 @@ export default function Services() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeForm}
-              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              className="absolute inset-0 bg-white/40 backdrop-blur-md"
             />
             
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-md bg-charcoal-900 border border-white/15 rounded-3xl shadow-2xl p-6 md:p-8 z-10"
+              className="relative w-full max-w-md bg-white border border-black/10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] p-6 md:p-8 z-10"
             >
               <button 
                 onClick={closeForm}
-                className="absolute top-5 right-5 text-gray-400 hover:text-white transition-colors p-1"
+                className="absolute top-5 right-5 text-gray-400 hover:text-[#1f1f1f] transition-colors p-1"
               >
                 <X className="w-5 h-5" />
               </button>
               
-              <h3 className="font-heading text-2xl font-bold text-white mb-1">Book Consultation</h3>
-              <p className="text-gray-400 mb-6 text-xs">
-                Selected Service: <span className="text-indigo-400 font-semibold">{selectedService}</span>
+              <h3 className="font-heading text-2xl font-bold text-[#1f1f1f] mb-1">Book Consultation</h3>
+              <p className="text-gray-500 mb-6 text-xs">
+                Selected Service: <span className="text-indigo-600 font-semibold">{selectedService}</span>
               </p>
               
               {submitted ? (
                 <div className="py-8 text-center">
-                  <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
-                    <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+                  <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-100">
+                    <CheckCircle2 className="w-8 h-8 text-emerald-500" />
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-2">Slot Booked!</h4>
-                  <p className="text-gray-400 text-sm">We&apos;ll be in touch with you shortly.</p>
+                  <h4 className="text-xl font-bold text-[#1f1f1f] mb-2">Slot Booked!</h4>
+                  <p className="text-gray-500 text-sm">We&apos;ll be in touch with you shortly.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -351,7 +351,7 @@ export default function Services() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-indigo-500 transition-colors"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1f1f1f] placeholder:text-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
                     />
                   </div>
                   <div>
@@ -361,7 +361,7 @@ export default function Services() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-indigo-500 transition-colors"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1f1f1f] placeholder:text-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
                     />
                   </div>
                   <div>
@@ -371,39 +371,39 @@ export default function Services() {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-indigo-500 transition-colors"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1f1f1f] placeholder:text-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-xs font-medium text-gray-400 mb-1 block">Preferred Date</label>
+                      <label className="text-xs font-medium text-gray-500 mb-1 block">Preferred Date</label>
                       <input 
                         type="date" 
                         required
                         value={formData.date}
                         onChange={(e) => setFormData({...formData, date: e.target.value})}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 transition-colors [color-scheme:dark]"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-xs text-[#1f1f1f] focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
                       />
                     </div>
                     <div>
-                      <label className="text-xs font-medium text-gray-400 mb-1 block">Preferred Time</label>
+                      <label className="text-xs font-medium text-gray-500 mb-1 block">Preferred Time</label>
                       <select 
                         value={formData.time}
                         onChange={(e) => setFormData({...formData, time: e.target.value})}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 transition-colors"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-xs text-[#1f1f1f] focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
                         required
                       >
                         <option value="" disabled>Select time</option>
-                        <option value="morning" className="bg-charcoal-900 text-white">Morning (9 AM - 12 PM)</option>
-                        <option value="afternoon" className="bg-charcoal-900 text-white">Afternoon (1 PM - 5 PM)</option>
-                        <option value="evening" className="bg-charcoal-900 text-white">Evening (6 PM - 9 PM)</option>
+                        <option value="morning">Morning (9 AM - 12 PM)</option>
+                        <option value="afternoon">Afternoon (1 PM - 5 PM)</option>
+                        <option value="evening">Evening (6 PM - 9 PM)</option>
                       </select>
                     </div>
                   </div>
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full mt-2 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 via-primary to-cyan-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all disabled:opacity-70"
+                    className="w-full mt-2 py-3.5 rounded-xl bg-[#1a1a1a] text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all disabled:opacity-70"
                   >
                     {isSubmitting ? "Confirming..." : "Confirm Booking"}
                   </button>
