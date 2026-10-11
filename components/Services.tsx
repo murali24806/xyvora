@@ -10,17 +10,6 @@ export default function Services() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "", date: "", time: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [activeStep, setActiveStep] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  // Auto-cycle tracking step every 3.5s (pauses on hover)
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % processSteps.length);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, [isPaused]);
 
   const handleBookSlot = (serviceTitle: string) => {
     setSelectedService(serviceTitle);

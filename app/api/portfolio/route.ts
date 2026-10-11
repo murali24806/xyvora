@@ -32,13 +32,16 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json([], { status: 200 });
+    }
     const items = await prisma.portfolioItem.findMany({
       orderBy: { createdAt: 'desc' },
     });
     
     return NextResponse.json(items, { status: 200 });
   } catch (error) {
-    console.error("Error fetching portfolio items:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.warn("Portfolio database not reachable, returning default items:", error);
+    return NextResponse.json([], { status: 200 });
   }
 }
