@@ -24,3 +24,28 @@ body {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-primary;
   }
 }
+
+.ss-grain::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140%;
+  height: 140%;
+  opacity: .05;
+  background-image: url(https://cdn.21st.dev/assets/mirror/07/0779a346a8a608cb9830a8892152beae5fd79088a7a4f4a50a9d9ebf435e5404.png);
+  animation: ss-grain 8s steps(10) infinite;
+}
+
+@keyframes ss-grain {
+  0% { transform: translate(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-5%, -10%); }
+  20%, 40%, 60%, 80%, 100% { transform: translate(-15%, -20%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-grain::after {
+    animation: none;
+  }
+}
+

@@ -1,67 +1,64 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
-const testimonials = [
+const TESTIMONIALS_DATA = [
   {
-    quote: "XyvorA completely transformed our brand identity. The new website is stunning and our conversion rate has doubled since launch.",
-    name: "Sarah Jenkins",
-    title: "CEO, InnovateTech",
+    id: 1,
+    name: "Alex Johnson",
+    role: "Full Stack Developer & Founder",
+    company: "TechFlow",
+    content:
+      "XyvorA completely transformed our brand and web presence. Their attention to design details, performance speed, and frictionless user flows saved us weeks of engineering time. Worth every single penny!",
     rating: 5,
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
   },
   {
-    quote: "Their team's attention to detail and creative vision is unmatched. The ad campaign they shot for us was our most successful yet.",
-    name: "Marcus Chen",
-    title: "Marketing Director, Bloom Coffee",
+    id: 2,
+    name: "Sarah Miller",
+    role: "Creative Director",
+    company: "DesignHub",
+    content:
+      "I've worked with many creative agencies, but XyvorA stands out for their relentless precision. The 9:16 motion ads and branding kit they delivered spiked our social conversions immediately.",
     rating: 5,
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
   },
   {
-    quote: "Fast, professional, and incredibly talented. They took our rough ideas and turned them into a polished, modern brand package.",
+    id: 3,
+    name: "Michael Chen",
+    role: "Product Lead",
+    company: "InnovateLabs",
+    content:
+      "Our team launched our mobile application and landing page in record time thanks to XyvorA. Everything from architecture, UI wireframes, and cinematic visuals was top-tier quality.",
+    rating: 5,
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    id: 4,
     name: "Elena Rodriguez",
-    title: "Founder, EcoStyle",
+    role: "Head of Marketing",
+    company: "EcoStyle",
+    content:
+      "Fast, proactive, and exceptionally skilled. XyvorA took our raw brand concepts and created an unmistakable identity and press-ready collateral that our customers love.",
     rating: 5,
+    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
   },
 ];
 
+const TRUSTED_BRANDS = ["Google", "Microsoft", "Airbnb", "Spotify", "Netflix"];
+
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-charcoal-900 relative overflow-hidden">
-      {/* Background blobs */}
-      <div className="absolute top-0 right-0 w-72 h-72 md:w-[500px] md:h-[500px] bg-primary/10 rounded-full blur-[80px] md:blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
-      
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-primary font-medium tracking-wide uppercase mb-3">Testimonials</h2>
-          <h3 className="text-3xl md:text-5xl font-bold">What Our Clients Say</h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="glass-panel p-8 rounded-2xl border-white/5 hover:border-primary/30 transition-colors"
-            >
-              <div className="flex gap-1 mb-6">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                ))}
-              </div>
-              <p className="text-lg text-gray-300 mb-8 italic">
-                &quot;{testimonial.quote}&quot;
-              </p>
-              <div>
-                <div className="font-bold text-white text-lg">{testimonial.name}</div>
-                <div className="text-primary text-sm">{testimonial.title}</div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div id="testimonials" className="w-full bg-[#f7f5f0] relative overflow-hidden border-t border-black/5">
+      <AnimatedTestimonials
+        title="Loved by Founders and Growing Brands"
+        subtitle="Don't just take our word for it. Here is how XyvorA elevates businesses with high-converting web apps, branding, and smart creative media."
+        badgeText="Client Testimonials"
+        testimonials={TESTIMONIALS_DATA}
+        trustedCompanies={TRUSTED_BRANDS}
+        trustedCompaniesTitle="Trusted by innovators and companies worldwide"
+        className="bg-transparent"
+      />
+    </div>
   );
 }

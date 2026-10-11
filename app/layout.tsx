@@ -10,6 +10,19 @@ export const metadata: Metadata = {
   title: "XyvorA | Smart Creative Solutions & Freelance Agency",
   description: "XyvorA is a creative services freelance agency providing complete brand growth through smart creative solutions, web design, and digital marketing.",
   keywords: ["XyvorA", "smart creative solutions", "freelance agency", "web design", "digital marketing", "creative services", "brand growth", "UI/UX design", "web development"],
+  openGraph: {
+    title: "XyvorA | Smart Creative Solutions & Freelance Agency",
+    description: "XyvorA is a creative services freelance agency providing complete brand growth through smart creative solutions, web design, and digital marketing.",
+    url: "https://www.xyvora.co.in",
+    siteName: "XyvorA",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "XyvorA | Smart Creative Solutions & Freelance Agency",
+    description: "XyvorA is a creative services freelance agency providing complete brand growth through smart creative solutions, web design, and digital marketing.",
+  },
 };
 
 import WhatsAppButton from "@/components/WhatsAppButton";
