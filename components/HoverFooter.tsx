@@ -56,25 +56,19 @@ export default function HoverFooter() {
   const contactInfo = [
     {
       icon: <Mail size={18} className="text-[#3ca2fa]" />,
-      text: "xyvoratech@gmail.com",
-      href: "mailto:xyvoratech@gmail.com",
+      text: "saipatnala248@gmail.com",
+      href: "mailto:saipatnala248@gmail.com",
     },
     {
       icon: <Phone size={18} className="text-[#3ca2fa]" />,
-      text: "+91 73821 83616",
+      text: "+91 73821 83616 / +91 89190 09613",
       href: "tel:+917382183616",
     },
     {
-      icon: <Phone size={18} className="text-[#3ca2fa]" />,
-      text: "+91 89190 09613",
-      href: "tel:+918919009613",
-    },
-    {
       icon: <MapPin size={18} className="text-[#3ca2fa]" />,
-      text: "Visakhapatnam, India",
+      text: "Visakhapatnam",
     },
   ];
-
 
   // Social media icons
   const socialLinks = [
@@ -86,16 +80,16 @@ export default function HoverFooter() {
   ];
 
   return (
-    <footer id="about" className="bg-white/80 border border-black/5 backdrop-blur-md relative h-fit rounded-3xl overflow-hidden m-4 sm:m-8 mt-16 sm:mt-24 shadow-sm">
+    <footer id="about" className="bg-[#0a0a0c] border border-white/10 relative h-fit rounded-3xl overflow-hidden m-4 sm:m-8 mt-16 sm:mt-24 shadow-2xl">
       <div className="max-w-7xl mx-auto p-6 sm:p-10 md:p-14 z-40 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-16 pb-8 md:pb-12">
           {/* Brand section */}
           <div className="flex flex-col space-y-4 items-center md:items-start text-center md:text-left">
             <div className="flex items-center space-x-2">
-              <Logo className="w-8 h-8 text-[#1f1f1f]" />
-              <span className="text-[#1f1f1f] text-3xl font-bold">XyvorA</span>
+              <Logo className="w-8 h-8" />
+              <span className="text-white text-3xl font-bold">XyvorA</span>
             </div>
-            <p className="text-sm leading-relaxed text-gray-600">
+            <p className="text-sm leading-relaxed text-gray-300">
               XyvorA is a modern creative agency specializing in striking visual identities and high-converting websites.
             </p>
           </div>
@@ -103,7 +97,7 @@ export default function HoverFooter() {
           {/* Footer link sections */}
           {footerLinks.map((section) => (
             <div key={section.title} className="flex flex-col items-center md:items-start text-center md:text-left">
-              <h4 className="text-[#1f1f1f] text-lg font-semibold mb-4 md:mb-6">
+              <h4 className="text-white text-lg font-semibold mb-4 md:mb-6">
                 {section.title}
               </h4>
               <ul className="space-y-3">
@@ -111,7 +105,7 @@ export default function HoverFooter() {
                   <li key={link.label} className="relative w-fit">
                     <a
                       href={link.href}
-                      className="text-gray-600 hover:text-indigo-600 transition-colors"
+                      className="text-gray-400 hover:text-[#3ca2fa] transition-colors"
                     >
                       {link.label}
                     </a>
@@ -126,22 +120,22 @@ export default function HoverFooter() {
 
           {/* Contact section */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <h4 className="text-[#1f1f1f] text-lg font-semibold mb-4 md:mb-6">
+            <h4 className="text-white text-lg font-semibold mb-4 md:mb-6">
               Contact Us
             </h4>
             <ul className="space-y-4">
               {contactInfo.map((item, i) => (
-                <li key={i} className="flex items-center space-x-3 text-gray-600 justify-center md:justify-start">
+                <li key={i} className="flex items-center space-x-3 text-gray-400 justify-center md:justify-start">
                   {item.icon}
                   {item.href ? (
                     <a
                       href={item.href}
-                      className="hover:text-indigo-600 transition-colors"
+                      className="hover:text-[#3ca2fa] transition-colors"
                     >
                       {item.text}
                     </a>
                   ) : (
-                    <span className="hover:text-indigo-600 transition-colors">
+                    <span className="hover:text-[#3ca2fa] transition-colors">
                       {item.text}
                     </span>
                   )}
@@ -151,10 +145,10 @@ export default function HoverFooter() {
           </div>
         </div>
 
-        <hr className="border-t border-black/10 my-6 md:my-8" />
+        <hr className="border-t border-gray-700/50 my-6 md:my-8" />
 
         {/* Footer bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-6 md:space-y-0 text-gray-500">
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-6 md:space-y-0 text-gray-400">
           {/* Social icons */}
           <div className="flex space-x-6">
             {socialLinks.map(({ icon, label, href }) => (
@@ -162,7 +156,7 @@ export default function HoverFooter() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="hover:text-indigo-600 transition-colors"
+                className="hover:text-[#3ca2fa] transition-colors"
               >
                 {icon}
               </a>
