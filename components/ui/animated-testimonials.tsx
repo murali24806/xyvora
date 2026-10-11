@@ -171,13 +171,15 @@ export function AnimatedTestimonials({
 
                     <div className="flex items-center gap-4">
                       <Avatar className="h-12 w-12 border border-black/10">
-                        <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                        <AvatarFallback className="bg-[#4f46e5]/10 text-[#4f46e5] font-bold">{testimonial.name.charAt(0)}</AvatarFallback>
+                        <AvatarImage src={testimonial.avatar} alt={testimonial.name || "Testimonial"} />
+                        <AvatarFallback className="bg-[#4f46e5]/10 text-[#4f46e5] font-bold">
+                          {testimonial.name?.charAt(0) || "X"}
+                        </AvatarFallback>
                       </Avatar>
                       <div>
-                        <h3 className="font-semibold text-[#1c1917] text-base">{testimonial.name}</h3>
+                        <h3 className="font-semibold text-[#1c1917] text-base">{testimonial.name || "Satisfied Client"}</h3>
                         <p className="text-xs sm:text-sm text-[#78716c]">
-                          {testimonial.role}, <span className="text-[#4f46e5] font-medium">{testimonial.company}</span>
+                          {testimonial.role || "Founder"}, <span className="text-[#4f46e5] font-medium">{testimonial.company || "XyvorA Partner"}</span>
                         </p>
                       </div>
                     </div>
