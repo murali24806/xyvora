@@ -4,6 +4,7 @@ import Services from "@/components/Services";
 import WorkProgress from "@/components/WorkProgress";
 import Portfolio from "@/components/Portfolio";
 import Testimonials from "@/components/Testimonials";
+import VizagLocalSEO from "@/components/VizagLocalSEO";
 import CTA from "@/components/CTA";
 import Contact from "@/components/Contact";
 import HoverFooter from "@/components/HoverFooter";
@@ -17,6 +18,7 @@ export default function Home() {
       <WorkProgress />
       <Portfolio />
       <Testimonials />
+      <VizagLocalSEO />
       <CTA />
       <Contact />
       <HoverFooter />

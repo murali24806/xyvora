@@ -90,7 +90,7 @@ export default function HoverFooter() {
               <span className="text-white text-3xl font-bold">XyvorA</span>
             </div>
             <p className="text-sm leading-relaxed text-gray-300">
-              XyvorA is a modern creative agency specializing in striking visual identities and high-converting websites.
+              XyvorA is Visakhapatnam&apos;s premier creative agency specializing in modern visual identities, high-converting websites, and digital growth.
             </p>
           </div>
 
