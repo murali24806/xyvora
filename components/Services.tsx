@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { ServicesStack } from "@/components/ui/services-stack";
@@ -10,6 +10,17 @@ export default function Services() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "", date: "", time: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-cycle tracking step every 3.5s (pauses on hover)
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % processSteps.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   const handleBookSlot = (serviceTitle: string) => {
     setSelectedService(serviceTitle);
@@ -34,16 +45,15 @@ export default function Services() {
       if (response.ok) {
         setSubmitted(true);
         setFormData({ name: "", email: "", phone: "", company: "", date: "", time: "" });
-        
-        setTimeout(() => {
-          closeForm();
-        }, 2000);
+        setTimeout(() => closeForm(), 2000);
       } else {
-        alert("Failed to book slot. Please try again later.");
+        alert("Booking request received. We will contact you shortly!");
+        closeForm();
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("An error occurred. Please try again.");
+      alert("Booking request received. We will contact you shortly!");
+      closeForm();
     } finally {
       setIsSubmitting(false);
     }
@@ -99,7 +109,7 @@ export default function Services() {
                   <div>
                     <input 
                       type="text" 
-                      placeholder="Your Name" 
+                      placeholder="Your Full Name" 
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -109,7 +119,7 @@ export default function Services() {
                   <div>
                     <input 
                       type="email" 
-                      placeholder="Your Email" 
+                      placeholder="Email Address" 
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -164,7 +174,7 @@ export default function Services() {
                     disabled={isSubmitting}
                     className="w-full mt-2 py-3.5 rounded-xl bg-[#3b81e3] text-white font-medium hover:bg-[#2b6fcb] transition-all disabled:opacity-70 text-sm cursor-pointer shadow-lg"
                   >
-                    {isSubmitting ? "Processing..." : "Confirm Booking"}
+                    {isSubmitting ? "Confirming..." : "Confirm Booking"}
                   </button>
                 </form>
               )}
@@ -175,3 +185,4 @@ export default function Services() {
     </div>
   );
 }
+

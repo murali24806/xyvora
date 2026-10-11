@@ -1,14 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export default function CTA() {
   return (
     <section className="py-24 relative overflow-hidden bg-[#f7f5f0] border-t border-black/5 text-[#1c1917]">
       <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto p-10 md:p-16 rounded-3xl border border-black/10 bg-white/90 shadow-2xl backdrop-blur-xl"
@@ -18,18 +19,19 @@ export default function CTA() {
             Let&apos;s discuss how we can bring your creative vision to life and build a digital presence that stands out.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a 
               href="#contact" 
               className="px-8 py-4 rounded-full bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white font-medium shadow-[0_4px_14px_rgba(99,102,241,0.39)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.5)] transition-all hover:scale-105"
             >
-              Get a Free Quote
+              <span>Estimate Your Project</span>
+              <ArrowRight className="w-4 h-4" />
             </a>
             <a 
               href="#services" 
               className="px-8 py-4 rounded-full border border-black/15 bg-white text-[#1c1917] font-medium hover:bg-black/5 transition-colors"
             >
-              Explore Services
+              Explore Capabilities
             </a>
           </div>
         </motion.div>
@@ -37,3 +39,4 @@ export default function CTA() {
     </section>
   );
 }
+

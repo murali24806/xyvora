@@ -43,6 +43,22 @@ const TESTIMONIALS_DATA = [
     rating: 5,
     avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
   },
+  {
+    author: {
+      name: "David Park",
+      handle: "Head of Product @ Apex Capital",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "The financial mobile app design system engineered by XyvorA increased our user retention by 140%. Seamless React Native integration!",
+  },
+  {
+    author: {
+      name: "Jessica Vance",
+      handle: "Creative Lead @ Lumina Organics",
+      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "Working with XyvorA feels like having an elite design team in-house. Their spatial UI prototypes blew our stakeholders away.",
+  }
 ];
 
 const TRUSTED_BRANDS = ["Google", "Microsoft", "Airbnb", "Spotify", "Netflix"];

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState, useEffect } from "react";
 import { ProjectShowcase } from "@/components/ui/project-showcase";
@@ -144,6 +145,84 @@ export default function Portfolio() {
           </div>
         )}
       </div>
+
+      {/* Project Detail Lightbox Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="absolute inset-0 bg-white/40 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl bg-white border border-black/10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] overflow-hidden z-10"
+            >
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/60 backdrop-blur-sm border border-black/10 text-gray-500 hover:text-[#1f1f1f] transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="relative h-72 w-full">
+                <img src={selectedProject.imgUrl} alt={selectedProject.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <span className="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold uppercase tracking-wider">
+                    {selectedProject.category}
+                  </span>
+                  <h3 className="font-heading text-2xl md:text-3xl font-extrabold text-[#1f1f1f] mt-2">
+                    {selectedProject.title}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="p-6 md:p-8 space-y-6">
+                <div>
+                  <h4 className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Project Overview</h4>
+                  <p className="text-gray-700 text-sm md:text-base leading-relaxed">{selectedProject.description}</p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 py-4 border-y border-gray-100">
+                  <div>
+                    <span className="text-xs text-gray-500 block">Client</span>
+                    <span className="text-sm font-bold text-[#1f1f1f]">{selectedProject.client}</span>
+                  </div>
+                  <div>
+                    <span className="text-xs text-gray-500 block">Verified Result</span>
+                    <span className="text-sm font-bold text-emerald-600">{selectedProject.results}</span>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 pt-2">
+                  <button
+                    onClick={() => {
+                      setSelectedProject(null);
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="flex-1 py-3 px-4 rounded-xl bg-[#1a1a1a] text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all text-center"
+                  >
+                    Request Similar Project
+                  </button>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="py-3 px-5 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700 text-sm font-medium transition-colors"
+                  >
+                    Close Preview
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
+

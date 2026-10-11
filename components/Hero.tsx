@@ -122,5 +122,5 @@ export default function Hero() {
         </div>
       </RobotHero>
     </section>
-  );
+  )
 }
